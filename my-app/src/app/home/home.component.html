@@ -3,18 +3,38 @@
         <h2>개발 환경 구축</h2>
         <div class="sm-angular__desc">
             <ol>
-                <li>npm / node.js 설치 <a href="https://nodejs.org/en/" target="_blank" title="npm/node.js 설치하러 가기">[설치]</a></li>
-                <li>npm으로 Angular CLI 설치
-                    <ul>
-                        <li>[설치법] $ npm install -g @angular/cli@latest</li>
-                        <li><a href="https://cli.angular.io/" target="_blank" title="Angular CLI 참고사이트 가기">Angular CLI 참고사이트</a></li>
-                    </ul>
+                <li>
+                    <div>npm / node.js 설치 <a href="https://nodejs.org/en/" target="_blank" title="npm/node.js 설치하러 가기">[설치]</a></div>
+<pre><code class="typescript">
+    #npm package 설치
+
+    #지역 설치
+    $ npm install [package명]
+
+    #전역 설치
+    $ npm install -g [package명]
+
+</code></pre>
                 </li>
-                <li>프로젝트 생성
-                    <ul>
-                        <li>ng new <em>[project-name]</em></li>
-                        <li>스캐폴딩(파일 구조) 생성</li>
-                    </ul>
+                <li>
+                    <div>npm으로 Angular CLI 설치 <a href="https://cli.angular.io/" target="_blank" title="Angular CLI 참고사이트 가기">[참고사이트]</a></div>
+<pre><code class="typescript">
+    #Angular CLI 설치 
+    $ npm install -g @angular/cli@latest
+
+</code></pre>
+
+                </li>
+                <li>Angular CLI로 프로젝트 생성 및 컴포넌트 생성
+                    <div>스캐폴딩(파일 구조) 생성</div>
+<pre><code class="typescript">
+    #프로젝트 생성 
+    $ ng new [Project명]
+
+    #컴포넌트 생성
+    $ ng new generate component [Component명]
+
+</code></pre>
                 </li>
                 <li>프로젝트 실행 - [로컬 환경] 
                     <ul>
@@ -560,5 +580,7 @@ export class AppModule &#123; &#125;
                 </div>
             </div>
         </div>
+        <app-contents></app-contents>
     </section>
+
 </div>

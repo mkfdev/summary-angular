@@ -1,0 +1,64 @@
+<section>
+	<div class="sm-angular__desc">
+        <h2>디렉티브 예제</h2>
+        <div class="sm-angular__desc-result">
+            <div class="sm-angular__directive-ex">
+            	<input type="text" placeholder="이름을 입력하세요" #name>
+            	<button (click)="addUser(name.value)">add user</button>
+
+            	<ul>
+            		<li *ngFor="let user of users; let i=index; trackBy: trackByUserId">{{ i }} : {{ user.name }} <button (click)="removeUser(user.id)">delete</button></li>	
+            	</ul>
+            </div>
+
+            <pre>{{ users | json }}</pre>
+        </div>
+        <div class="sm-angular__desc-detail">
+            <strong class="sm-angular__desc-sep-tit">ngFor 디렉티브</strong>
+            <ul>
+                <li>설명</li>
+            </ul>
+            
+            <div class="sm-angular__desc-detail">
+                <div class="sm-angular__desc-detail-console">
+                    <div class="sm-angular__language-typescript">
+<!-- source view-->
+<pre><code class="typescript">
+    import &#123; Component &#125; from '&#64;angular&#47;core'&#59;
+    &#64;Component&#40;&#123;
+      selector: 'app-root',
+      templateUrl:&#96;
+        &lt;div class="sm-angular__directive-ex"&gt;
+            &lt;input type="text" placeholder="이름을 입력하세요" #name&gt;
+            &lt;button (click)="addUser(name.value)">add user&lt;/button&gt;
+
+            &lt;ul&gt;
+                &lt;li *ngFor="let user of users; let i=index; trackBy: trackByUserId"&gt; &#123; &#123; i &#125; &#125; : &#123; &#123; user.name &#125; &#125; &lt;button (click)="removeUser(user.id)"&gt;delete&lt;/button&gt;&lt;/li&gt;  
+            &lt;/ul&gt;
+        &lt;/div&gt;
+        &#96;,
+      styleUrls: &#91;'.&#47;app.component.css'&#93;
+    &#125;&#41;
+
+    export class AppComponent &#123;
+                                
+        name = "Angular"&#59;
+        age = "20"&#59;
+        admin = true&#59;
+        address = &#123;
+            city : 'Seoul',
+            country: 'Korea'
+        &#125;
+        sayHi&#40;&#41;&#123;
+            return 'Hi My name is &#36;&#123;this.name&#125;'&#59;
+        &#125;
+
+    &#125;
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+</section>
