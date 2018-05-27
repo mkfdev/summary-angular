@@ -1,27 +1,25 @@
 <section>
 	<div class="sm-angular__desc">
         <h2>디렉티브 예제</h2>
-        <div class="sm-angular__desc-result">
-            <div class="sm-angular__directive-ex">
-            	<input type="text" placeholder="이름을 입력하세요" #name>
-            	<button (click)="addUser(name.value)">add user</button>
-
-            	<ul>
-            		<li *ngFor="let user of users; let i=index; trackBy: trackByUserId">{{ i }} : {{ user.name }} <button (click)="removeUser(user.id)">delete</button></li>	
-            	</ul>
-            </div>
-
-            <pre>{{ users | json }}</pre>
-        </div>
         <div class="sm-angular__desc-detail">
             <strong class="sm-angular__desc-sep-tit">ngFor 디렉티브</strong>
             <ul>
-                <li>설명</li>
+                <li>디렉티브(Directive)는 “DOM의 모든 것(모양이나 동작 등)을 관리하기 위한 지시(명령)”입니다.</li>
+                <li>ngIf, ngFor, ngSwitch(빌트인 디렉티브)등이 있습니다.</li>
             </ul>
+
+<pre><code>
+
+    # ngFor 구문 사용법(1)
+    &lt;ng-template ngFor let-item [ngForOf]="items"&gt;
+
+    # ngFor 구문 사용법(2)
+    &lt;li *ngFor="let item of items; let i=index;"&gt;&lt;/li&gt;
+
+</code></pre>
             
-            <div class="sm-angular__desc-detail">
-                <div class="sm-angular__desc-detail-console">
-                    <div class="sm-angular__language-typescript">
+            <div class="sm-angular__desc-detail-console">
+                <div class="sm-angular__language-typescript">
 <!-- source view-->
 <pre><code class="typescript">
     import &#123; Component &#125; from '&#64;angular&#47;core'&#59;
@@ -42,23 +40,54 @@
 
     export class AppComponent &#123;
                                 
-        name = "Angular"&#59;
-        age = "20"&#59;
-        admin = true&#59;
-        address = &#123;
-            city : 'Seoul',
-            country: 'Korea'
+        users: User&#91;&#93; = &#91;
+            &#123; id: 1, name: 'Lee'&#125;,
+            &#123; id: 2, name: 'Kim'&#125;,
+            &#123; id: 3, name: 'Baek'&#125;,
+            &#123; id: 4, name: 'Choi'&#125;
+        &#93;;
+
+        //user를 추가한다
+        addUser(name: string) &#123;
+            if(name)&#123;
+                this.users.push(&#123; id: this.getNewUserId(), name &#125;);
+            &#125;
         &#125;
-        sayHi&#40;&#41;&#123;
-            return 'Hi My name is &#36;&#123;this.name&#125;'&#59;
+
+        //해당 user를 제거한다
+        removeUser(userid: number)&#123;
+            this.users = this.users.filter((&#123; id &#125;) => id !== userid );
+        &#125;
+
+        //추가될 users의 id를 반환한다
+        getNewUserId(): number &#123;
+            return this.users.length ? Math.max(...this.users.map((&#123;id&#125;) => id)) + 1 : 1;
+        &#125;
+
+        //변경 트래킹 기준을 반환한다
+        trackByUserId(index: number, user: User)&#123;
+            //user.id를 기준으로 변경을 트래킹한다.
+            return user.id; // or index
         &#125;
 
     &#125;
 </code></pre>
-                    </div>
                 </div>
             </div>
-        </div> 
+        </div>
+        <div class="sm-angular__desc-result">
+            <div class="sm-angular__directive-ex">
+            	<input type="text" placeholder="이름을 입력하세요" #name>
+            	<button (click)="addUser(name.value)">add user</button>
+
+            	<ul>
+            		<li *ngFor="let user of users; let i=index; trackBy: trackByUserId">{{ i }} : {{ user.name }} <button (click)="removeUser(user.id)">delete</button></li>	
+            	</ul>
+            </div>
+
+            <pre>{{ users | json }}</pre>
+        </div>
+         
     </div>
 
 </section>

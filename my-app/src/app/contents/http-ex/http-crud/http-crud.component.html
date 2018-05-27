@@ -1,0 +1,103 @@
+<section>
+    <div class="sm-angular__desc">
+        <h2>HttpClient를 이용한 CRUD</h2>
+
+            <div class="sm-angular__desc-detail">
+            	<ul>
+		            <li>HttpClient 모듈을 임포트 합니다.</li>
+		            <li>db.json 파일을 루트에 생성하고, interface로 객체의 데이터 타입을 정의합니다.</li>
+		        </ul>
+                <div class="sm-angular__desc-detail-console">
+                    <div class="sm-angular__language-typescript">
+<!-- source view-->
+<pre><code class="typescript">
+    import &#123; Component &#125; from '&#64;angular&#47;core'&#59;
+    import &#123; HttpClient &#125; from '&#64;@angular&#47;common&#47;http&#59;
+
+    interface Todo &#123;
+	    id: number;
+	    content: string;
+	    completed: boolean;
+	&#125;
+
+    &#64;Component&#40;&#123;
+      selector: 'app-root',
+      templateUrl:&#96;
+        &lt;div class="sm-angular__http-ex"&gt;
+            &lt;input type="text" [(ngModel)]="content" placeholder="todo"&gt;
+		    &lt;button (click)="addTodo()"&gt;Add&lt;/button&gt;
+		    &lt;ul&gt;
+		      &lt;li *ngFor="let todo of todos"&gt; &#123; &#123; todo.content &#125; &#125;
+		      	&lt;button (click)="editTodo(todo)"&gt;update&lt;/button&gt;
+		      	&lt;button (click)="deleteTodo(todo.id)"&gt;delete&lt;/button&gt;&lt;/li&gt;
+		    &lt;/ul&gt;
+		    &lt;pre&gt; &#123; &#123; todos | json &#125; &#125; &lt;/pre&gt;
+        &#96;,
+      styleUrls: &#91;'.&#47;app.component.css'&#93;
+    &#125;&#41;
+
+    export class AppComponent &#123;
+                                
+        todos: Todo&#91; &#93;;
+		url: string = 'http://localhost:3000/todos';
+		content: string;
+
+	    // HttpClient를 컴포넌트에 주입
+	    constructor(private http: HttpClient) &#123; &#125;
+
+	    ngOnInit() &#123;
+	        this.getTodos();
+	    &#125;
+
+	    getTodos()&#123;
+	        this.http.get&lt;Todo&#91; &#93; &gt;(this.url)
+	      		.subscribe(todos =&gt; this.todos = todos);
+	    &#125;
+
+	    addTodo()&#123;
+	    	if(!this.content)&#123; return; &#125;
+
+	    	const payload = &#123; content:this.content, completed:false &#125;;
+
+	    	this.http.post(this.url, payload)
+	    		.subscribe(() =&gt; this.getTodos());
+
+	    	this.content = &#39;&#39;;
+	    &#125;
+
+	    editTodo(todo)&#123;
+	    	const &#123;id, completed&#125; = todo;
+	    	const payload = &#123; completed: !completed &#125;;
+
+	    	console.log(payload);
+
+	    	this.http.patch(&#96; &#36; &#123;this.url&#125;/&#36; &#123;id&#125;&#96;, payload)
+	    		.subscribe(() => this.getTodos());
+	    &#125;
+
+	    deleteTodo(id)&#123;
+	    	this.http.delete(&#96; &#36; &#123;this.url&#125;/&#36; &#123;id&#125; &#96;)
+	    		.subscribe(() => this.getTodos());
+	    &#125;
+
+
+    &#125;
+</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm-angular__desc-result">
+        	<div class="sm-angular__http-ex">
+	        	<input type="text" [(ngModel)]="content" placeholder="todo">
+			    <button (click)="addTodo()">Add</button>
+			    <ul>
+			      <li *ngFor="let todo of todos">{{ todo.content }}
+			      	<button (click)="editTodo(todo)">update</button>
+			      	<button (click)="deleteTodo(todo.id)">delete</button></li>
+			    </ul>
+			    <pre>{{ todos | json }}</pre>
+        	</div>
+        </div>
+    </div>
+</section>

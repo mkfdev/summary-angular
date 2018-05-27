@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <h1 class="title">Todos</h1>
+
+        <app-todo-input (addTodo)="addTodo($event)"></app-todo-input>
+        
+         <ng-container *ngIf="todos">
+           <app-todo-select
+           [navItems]="navItems"
+           [selectedNavItem]="selectedNavItem"
+           (setCurrentNavItem)="setCurrentNavItem($event)"></app-todo-select>
+  
+           <app-todo-list
+           [todos]="todos"
+           [selectedNavItem]="selectedNavItem"
+           (removeTodo)="removeTodo($event)"
+           (toggleCompleted)="toggleComplete($event)"></app-todo-list>
+  
+           <app-todo-footer
+           (toggleAllTodoAsComplete)="toggleAllTodo($event)"
+           (removeCompletedTodos)="removeCompletedTodos()"
+           [todos]="todos">
+           </app-todo-footer>
+         </ng-container>
+     
+    </div>
+</div>
