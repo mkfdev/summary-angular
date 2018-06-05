@@ -9,8 +9,7 @@ interface Todo {
 
 @Component({
   selector: 'app-http-crud',
-  templateUrl: './http-crud.component.html',
-  styleUrls: ['./http-crud.component.css']
+  templateUrl: './http-crud.component.html'
 })
 export class HttpCrudComponent implements OnInit {
 
@@ -28,7 +27,6 @@ export class HttpCrudComponent implements OnInit {
     getTodos(){
         this.http.get<Todo[]>(this.url)
       		.subscribe(todos => this.todos = todos);
-
       		console.log('get');
     }
 
@@ -54,6 +52,8 @@ export class HttpCrudComponent implements OnInit {
     }
 
     deleteTodo(id){
+        console.log(this.url,id);
+        
     	this.http.delete(`${this.url}/${id}`)
     		.subscribe(() => this.getTodos());
     }

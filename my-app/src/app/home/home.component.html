@@ -94,6 +94,67 @@
         </div>
     </section>
 
+    <section>
+        <h2>Module과 Component</h2>
+        <div class="sm-angular__desc">
+            <strong class="sm-angular__desc-sep-tit">간단한 설명 [app.module.ts]</strong>
+            <div class="sm-angular__desc-detail">
+<pre><code class="typescript">
+    //app.module.ts
+    //루트 모듈이 모든 애플리케이션의 시작점이다.
+    //루트 모듈에서 BrowserModule을 반드시 import 해야 한다.
+
+    import &#123; BrowserModule &#125; from '&#64;angular&#47;platform-browser'&#59;
+    import &#123; NgModule &#125; from '&#64;angular&#47;core'&#59;
+
+    //각 컴포넌트를 import 한다
+    import &#123; AppComponent &#125;  from '.&#47;app.component'&#59;
+
+    &#64;NgModule&#40;&#123;
+      declarations: &#91; //컴포넌트 선언 영역
+        AppComponent
+      &#93;,
+      imports: &#91; //모듈 임포트 영역
+        BrowserModule
+      &#93;,
+      providers: &#91; &#93;, //서비스 주입(전역에서 사용 가능)
+      bootstrap: &#91;AppComponent&#93;
+    &#125;&#41;
+    export class AppModule &#123; &#125;
+
+</code></pre>
+            </div>
+        </div>
+
+
+        <div class="sm-angular__desc">
+            <strong class="sm-angular__desc-sep-tit">간단한 설명 [app.component.ts]</strong>
+            <div class="sm-angular__desc-detail">
+<pre><code class="typescript">
+    //app.component.ts
+
+    import &#123; Component &#125; from '&#64;angular&#47;core'&#59;
+
+    //component 데코레이터(typescript문법)를 통해 메타데이터 속성을 전달함
+    //selector 해당 컴포넌트를 element 이름으로 렌더링 한다.
+    //template 뷰(view), selector에 선택된 돔에 해당 template이 들어간다.
+    //template과 style은 인라인 형식으로 작성 가능하다. (예제 형식 참고)
+    //인라인으로 작성할 때는 백틱(``)을 사용한다.
+
+    &#64;Component&#40;&#123;
+      selector: 'app-root',
+      templateUrl: './app.component.html',
+      styleUrls: &#91;'.&#47;app.component.css'&#93;
+    &#125;&#41;
+
+    //컴포넌트 로직에 해당 
+    export class AppComponent &#123;
+      title = 'app';
+    &#125;
+</code></pre>
+            </div>
+        </div>
+    </section>
     <!-- <section>
         <h2>컴포넌트 클래스와 템플릿 연동</h2>
         <div class="sm-angular__desc">
@@ -508,9 +569,9 @@
             <strong class="sm-angular__desc-sep-tit">7. 양방향 바인딩</strong>
             <ul>
                 <li>뷰와 컴포넌트 클래스의 상태 변화를 상호 반영하는 것.</li>
-                <li>좌변에는 [(ngModule)](ngModule디렉티브), 우변에는 뷰와 컴포넌트 클래스가 공유할 프로퍼티를 기술합니다.</li>
+                <li>좌변에는 [(ngModel)](ngModel 디렉티브), 우변에는 뷰와 컴포넌트 클래스가 공유할 프로퍼티를 기술합니다.</li>
                 <li>ngModule 디렉티브를 사용하기 위해서는, FormsModule 모듈을 임포트해야 합니다.</li>
-                <li>양방향 데이터 바인딩은 ngModule 디렉티브만 사용해야 하는 것은 아니며, 커스텀 양방향 데이터 바인딩도 작성할 수 있습니다.</li>
+                <li>양방향 데이터 바인딩은 ngModel 디렉티브만 사용해야 하는 것은 아니며, 커스텀 양방향 데이터 바인딩도 작성할 수 있습니다.</li>
             </ul>
             
             <div class="sm-angular__desc-detail">
@@ -547,24 +608,75 @@ export class AppModule &#123; &#125;
                     <div class="sm-angular__language-typescript">
 <!-- source view-->
 <pre><code>
-    import &#123; Component &#125; from '&#64;angular&#47;core'&#59;
+    import &#123; Component , OnInit &#125; from '&#64;angular&#47;core'&#59;
     &#64;Component&#40;&#123;
       selector: 'app-root',
       templateUrl:&#96;
         &lt;div class="sm-angular__binding-ex"&gt;
 
+            //1. 양방향 데이터 바인딩 표현식 사용
+
             &lt;input type="text" &#91;(ngModel)&#93;="longText"&gt;
             &lt;div&gt;address: &#123; &#123; longText &#125; &#125; &lt;/div&gt;
 
+
+            //2. 컴포넌트-템플릿 양방향 데이터 바인딩 (*뷰에 데이터 추가)
+
+            &lt;input type="text" &#91;(ngModel)&#93;="newText" (keyup.enter)="addTodo(newText)"&gt;
+            &lt;button (click)="addTodo(newText)"&gt;add&lt;/button&gt;
+            &lt;br&gt;
+            &lt;div *ngFor="let todo of todos" (click)="toggleTodo(todo)"&gt;
+                 &lt;input type="checkbox" &#91;checked&#93;="todo.done"&gt; &#123; &#123; todo.text &#125; &#125;
+             &lt;/div&gt;
+            &#123; &#123; todos[0].done &#125; &#125;
+            &#123; &#123; todos[1].done &#125; &#125;
         &lt;/div&gt;
 
         &#96;,
       styleUrls: &#91;'.&#47;app.component.css'&#93;
     &#125;&#41;
 
-    export class AppComponent &#123;
+    export class AppComponent implements OnInit&#123;
 
+        //1. 양방향 데이터 바인딩할 변수 선언 및 초기화
         longText = ''&#59;
+
+
+        //2. 컴포넌트-템플릿 양방향 데이터 바인딩
+        
+        //양방향 바인딩 - 데이터(모델) 타입지정
+        
+        todos: &#123;
+            text: string,
+            done: boolean
+        &#125;&#91; &#93;&#59;
+
+        //변수 초기화
+        addText = ''&#59;
+
+        constructor()&#123;
+            this.todos = &#91;
+                &#123; text: 'Javascript', done: false &#125;,
+                &#123; text: 'Angular', done: true &#125;
+            &#93;;
+        &#125;
+
+        toggleTodo(todo)&#123;
+            todo.done = !todo.done&#59;
+        &#125;
+
+        addTodo(newText: string)&#123;
+            this.todos.push(&#123;
+                text: newText,
+                done: false
+            &#125;)&#59;
+            newText = ''&#59;
+        &#125;
+
+        ngOnInit()&#123;
+            //초기 설정 할 데이터가 있으면 적어준다
+        &#125;
+
 
     &#125;
 </code></pre>
@@ -578,6 +690,20 @@ export class AppModule &#123; &#125;
                     <input type="text" [(ngModel)]="longText">
                     <div>address: {{ longText }}</div>
                 </div>
+            </div>
+            <div class="sm-angular__binding-ex">
+                <h3>공부할 것 (To Do List) </h3>
+                <input type="text" [(ngModel)]="newText" (keyup.enter)="addTodo(newText)">
+                <button (click)="addTodo(newText)">추가</button>
+                <br>
+                <div *ngFor="let todo of todos" (click)="toggleTodo(todo)">
+                    <input type="checkbox" [checked]="todo.done">{{ todo.text }}
+                </div>
+
+                <p>checked = true / uncheked = false</p>
+                <div *ngFor="let todo of todos">
+                    {{ todo.done }}
+                </div>                            
             </div>
         </div>
     </section>

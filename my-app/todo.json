@@ -1,0 +1,29 @@
+{
+  "todos": [
+    {
+      "content": "Angular6",
+      "completed": true,
+      "id": 2
+    },
+    {
+      "content": "SCSS",
+      "completed": false,
+      "id": 4
+    },
+    {
+      "content": "PHP",
+      "completed": false,
+      "id": 5
+    },
+    {
+      "content": "angular!",
+      "completed": false,
+      "id": 6
+    },
+    {
+      "content": "javascript",
+      "completed": true,
+      "id": 7
+    }
+  ]
+}

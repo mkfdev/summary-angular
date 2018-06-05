@@ -1,42 +1,5 @@
 {
-  "todos": [
-    {
-      "content": "Angular6",
-      "completed": true,
-      "id": 2
-    },
-    {
-      "content": "SCSS",
-      "completed": false,
-      "id": 4
-    },
-    {
-      "content": "PHP",
-      "completed": false,
-      "id": 5
-    },
-    {
-      "content": "angular!",
-      "completed": false,
-      "id": 6
-    },
-    {
-      "content": "javascript",
-      "completed": true,
-      "id": 7
-    }
-  ],
   "todolist": [
-    {
-      "content": "Angular6",
-      "completed": true,
-      "id": 1
-    },
-    {
-      "content": "SCSS",
-      "completed": false,
-      "id": 2
-    },
     {
       "id": 3,
       "content": "study angular",
@@ -56,6 +19,67 @@
       "id": 6,
       "content": "javascript",
       "completed": false
+    },
+    {
+      "id": 7,
+      "content": "php",
+      "completed": false
+    },
+    {
+      "id": 8,
+      "content": "css",
+      "completed": true
+    }
+  ],
+  "todos": [
+    {
+      "id": 3,
+      "content": "study angular",
+      "completed": false
+    },
+    {
+      "id": 4,
+      "content": "study backend express",
+      "completed": false
+    },
+    {
+      "id": 5,
+      "content": "Html",
+      "completed": false
+    },
+    {
+      "id": 6,
+      "content": "javascript",
+      "completed": false
+    },
+    {
+      "id": 7,
+      "content": "php",
+      "completed": false
+    },
+    {
+      "content": "test",
+      "completed": false,
+      "id": 8
+    },
+    {
+      "content": "test",
+      "completed": false,
+      "id": 9
+    }
+  ],
+  "talign": [
+    {
+      "name": "al-left",
+      "selected": "false"
+    },
+    {
+      "name": "al-right",
+      "selected": "false"
+    },
+    {
+      "name": "al-center",
+      "selected": "false"
     }
   ]
 }

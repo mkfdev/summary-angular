@@ -1,27 +1,56 @@
-<div class="container">
-    <div class="row">
-        <h1 class="title">Todos</h1>
-
-        <app-todo-input (addTodo)="addTodo($event)"></app-todo-input>
+<section>
+    <div class="sm-angular__desc">
+        <h2>컴포넌트 간 커뮤니케이션</h2>
         
-         <ng-container *ngIf="todos">
-           <app-todo-select
-           [navItems]="navItems"
-           [selectedNavItem]="selectedNavItem"
-           (setCurrentNavItem)="setCurrentNavItem($event)"></app-todo-select>
-  
-           <app-todo-list
-           [todos]="todos"
-           [selectedNavItem]="selectedNavItem"
-           (removeTodo)="removeTodo($event)"
-           (toggleCompleted)="toggleComplete($event)"></app-todo-list>
-  
-           <app-todo-footer
-           (toggleAllTodoAsComplete)="toggleAllTodo($event)"
-           (removeCompletedTodos)="removeCompletedTodos()"
-           [todos]="todos">
-           </app-todo-footer>
-         </ng-container>
-     
+        <div class="sm-angular__desc-detail">
+            <ul>
+                <li>루트 컴포넌트 : app-http-todo</li>
+                <li>자식 컴포넌트 : app-todo-input / app-todo-select / app-todo-list / app-todo-footer </li>
+                <li>@Input : 부모 컴포넌트 -> 자식 컴포넌트 </li>
+                <li>@Output : 자식 컴포넌트 -> 부모 컴포넌트 </li>
+            </ul>
+
+            <div>
+                <p>1. root 템플릿(app-htto-todo)에서 각 컴포넌트 요소에 이벤트 바인딩 / 데이터 바인딩</p>
+                <img src="assets/images/http-1.gif" alt="">
+            </div>
+            <div>
+                <p>2. 해당하는 자식 컴포넌트에서 root 컴포넌트로 데이터 상태와 이벤트를 전달한다.(현재는 인라인 형식으로 html이 작성됨) </p>
+                <img src="assets/images/http-2.gif" alt="">
+            </div>
+            <div>
+                <p>3. @Output으로 emit한 이벤트 함수를 가지고 root(부모) component에서 로직을 구현한다.<br>
+                나머지 자식 컴포넌트도 @Input/@Output을 통해 이벤트와 데이터를 주고 받는다. </p>
+                <img src="assets/images/http-0.gif" alt="">
+            </div>
+        </div>
+
+
+        <div class="container">
+            <h1 class="title">Todos</h1>
+
+            <app-todo-input (addTodo)="addTodo($event)"></app-todo-input>
+
+            <ng-container *ngIf="todos">
+                <app-todo-select
+                [navItems]="navItems"
+                [selectedNavItem]="selectedNavItem"
+                (setCurrentNavItem)="setCurrentNavItem($event)"></app-todo-select>
+
+                <app-todo-list
+                [todos]="todos"
+                [selectedNavItem]="selectedNavItem"
+                (removeTodo)="removeTodo($event)"
+                (toggleCompleted)="toggleComplete($event)"></app-todo-list>
+
+                <app-todo-footer
+                (toggleAllTodoAsComplete)="toggleAllTodo($event)"
+                (removeCompletedTodos)="removeCompletedTodos()"
+                [todos]="todos">
+                </app-todo-footer>
+            </ng-container>
+        </div>
     </div>
-</div>
+
+
+</section>

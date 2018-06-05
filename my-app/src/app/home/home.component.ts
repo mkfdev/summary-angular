@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent{
+export class HomeComponent implements OnInit {
   
   // title = "Home Component";
   // name: string;
@@ -55,6 +55,38 @@ export class HomeComponent{
 
     //양방향 바인딩
     longText = '';
+
+    //양방향 바인딩 - 타입지정
+    todos: {
+        text: string,
+        done: boolean
+    }[];
+    //addText string
+    addText = '';
+
+    constructor(){
+        this.todos = [
+            { text: 'Javascript', done: false},
+            { text: 'Angular', done: false},
+            { text: 'React', done: false},
+            { text: 'HTML', done: false}
+        ];
+    }
+
+    toggleTodo(todo){
+        todo.done = !todo.done;
+    }
+
+    addTodo(newText: string){
+        this.todos.push({
+            text: newText,
+            done: false
+        });
+        newText = '';
+    }
+
+    ngOnInit(){}
+
 
 }
 

@@ -7,8 +7,7 @@ interface User {
 
 @Component({
   selector: 'app-ex01',
-  templateUrl: './ex01.component.html',
-  styleUrls: ['./ex01.component.css']
+  templateUrl: './ex01.component.html'
 })
 
 export class Ex01Component{

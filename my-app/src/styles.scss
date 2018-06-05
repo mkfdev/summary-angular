@@ -406,3 +406,24 @@ template {
     }
   }
 }
+
+
+/*todos styles*/
+.nav {
+  padding:0;
+  list-style:none;
+  li {
+    float: left;
+    width: 100px;
+    margin-right: 5px;
+    text-align: center;
+    background-color: orange;    
+    cursor: pointer;
+  }
+  &:after {
+    display:block;
+    clear:both;
+    content:'';
+  }
+
+}

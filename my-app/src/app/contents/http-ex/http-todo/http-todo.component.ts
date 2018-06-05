@@ -53,7 +53,7 @@ export class HttpTodoComponent implements OnInit {
 
     removeTodo(id: number) {
         // https://github.com/angular/angular/issues/18396
-        this.http.delete(`${this.url}/id/${id}`, { responseType: 'text' })
+        this.http.delete(`${this.url}/${id}`, { responseType: 'text' })
           .subscribe(() => this.todos = this.todos.filter(todo => todo.id !== id));
     }
 
@@ -61,7 +61,7 @@ export class HttpTodoComponent implements OnInit {
         const { completed } = this.todos.find(todo => todo.id === id);
         const payload = { completed: !completed };
 
-        this.http.patch(`${this.url}/id/${id}`, payload, { responseType: 'text' })
+        this.http.patch(`${this.url}/${id}`, payload, { responseType: 'text' })
             .subscribe(() => this.todos = this.todos.map(todo => {
             return todo.id === id ? Object.assign(todo, { completed: !completed }) : todo;
         }));
