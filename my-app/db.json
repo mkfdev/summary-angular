@@ -11,19 +11,14 @@
       "completed": false
     },
     {
-      "id": 5,
-      "content": "Html",
-      "completed": false
-    },
-    {
       "id": 6,
       "content": "javascript",
-      "completed": false
+      "completed": true
     },
     {
       "id": 7,
       "content": "php",
-      "completed": false
+      "completed": true
     },
     {
       "id": 8,

@@ -15,7 +15,6 @@ import { TodoSelectComponent } from './contents/http-ex/http-todo/todo-select.co
 import { TodoListComponent } from './contents/http-ex/http-todo/todo-list.component';
 import { TodoFilterPipe } from './contents/http-ex/http-todo/todo-filter.pipe';
 import { TodoFooterComponent } from './contents/http-ex/http-todo/todo-footer.component';
-import { StyleControlComponent } from './contents/style-control/style-control.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +29,7 @@ import { StyleControlComponent } from './contents/style-control/style-control.co
     TodoSelectComponent,
     TodoListComponent,
     TodoFilterPipe,
-    TodoFooterComponent,
-    StyleControlComponent
+    TodoFooterComponent
   ],
   imports: [
     BrowserModule,

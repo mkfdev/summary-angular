@@ -57,7 +57,7 @@ export class HttpTodoComponent implements OnInit {
           .subscribe(() => this.todos = this.todos.filter(todo => todo.id !== id));
     }
 
-    toggleComplete(id: number) {
+    toggleCompleted(id: number) {
         const { completed } = this.todos.find(todo => todo.id === id);
         const payload = { completed: !completed };
 

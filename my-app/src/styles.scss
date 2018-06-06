@@ -419,11 +419,33 @@ template {
     text-align: center;
     background-color: orange;    
     cursor: pointer;
+    a {
+      display: block;
+    }
   }
   &:after {
     display:block;
     clear:both;
     content:'';
   }
+}
+.list-group {
+  list-style: none;
+  padding: 0;
+  &-item {
+    margin-bottom: 10px;
+    padding-left: 10px;
+  }
+  input[type="checkbox"] {
+    vertical-align: middle;
+  }
+}
 
+.text-muted {
+  margin-left: 8px;
+  padding: 3px 6px;
+  color: #fff;
+  font-size: 13px;
+  background-color: green;
+  border-radius: 5px;
 }
